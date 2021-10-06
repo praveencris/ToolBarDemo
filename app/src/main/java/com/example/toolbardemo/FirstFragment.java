@@ -1,20 +1,21 @@
 package com.example.toolbardemo;
 
-import androidx.lifecycle.ViewModelProvider;
-
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+
+import com.example.toolbardemo.databinding.FirstFragmentBinding;
+
 public class FirstFragment extends Fragment {
 
     private FirstViewModel mViewModel;
+    private FirstFragmentBinding binding;
 
     public static FirstFragment newInstance() {
         return new FirstFragment();
@@ -23,14 +24,24 @@ public class FirstFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.first_fragment, container, false);
+        binding = FirstFragmentBinding.inflate(inflater, container, false);
+        return binding.getRoot();
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         mViewModel = new ViewModelProvider(this).get(FirstViewModel.class);
-        // TODO: Use the ViewModel
-    }
 
+        binding.goToSecondBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getParentFragmentManager().beginTransaction()
+                        .replace(R.id.fragment_container, SecondFragment.newInstance())
+                        .addToBackStack(null)
+                        .commit();
+            }
+        });
+
+    }
 }

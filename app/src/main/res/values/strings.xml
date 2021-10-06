@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">ToolBarDemo</string>
+    <string name="go_to_second_fragment">Go To Second Fragment</string>
+    <string name="go_back_to_first_fragment">Go Back to First Fragment</string>
 </resources>

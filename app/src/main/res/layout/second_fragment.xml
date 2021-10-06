@@ -6,14 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".SecondFragment">
 
+    <include android:id="@+id/appBarLayout"
+        layout="@layout/app_bar_layout" />
 
     <Button
         android:id="@+id/goBackToFirstBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Go Back to First Fragment"
+        android:text="@string/go_back_to_first_fragment"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/appBarLayout" />
 </androidx.constraintlayout.widget.ConstraintLayout>

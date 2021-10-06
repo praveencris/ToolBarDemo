@@ -12,9 +12,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.toolbardemo.databinding.SecondFragmentBinding;
+
 public class SecondFragment extends Fragment {
 
     private SecondViewModel mViewModel;
+    private SecondFragmentBinding binding;
 
     public static SecondFragment newInstance() {
         return new SecondFragment();
@@ -23,14 +26,21 @@ public class SecondFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.second_fragment, container, false);
+        binding= SecondFragmentBinding.inflate(inflater, container, false);
+        return binding.getRoot();
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         mViewModel = new ViewModelProvider(this).get(SecondViewModel.class);
-        // TODO: Use the ViewModel
-    }
 
+        binding.appBarLayout.toolBar.setNavigationIcon(R.drawable.ic_baseline_arrow_back_24);
+        binding.appBarLayout.toolBar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getParentFragmentManager().popBackStack();
+            }
+        });
+    }
 }
